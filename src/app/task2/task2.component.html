@@ -1,0 +1,38 @@
+<form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+    
+    <div>
+        <label>Email</label><br>
+        <input name="email" formControlName="userEmail" />
+  
+        @if(myForm.controls["userEmail"].invalid && myForm.controls["userEmail"].touched){
+            <div class="alert">Некорректный email</div>
+        }
+    </div>
+    <div>
+        <label>Password</label><br>
+        <input name="password" formControlName="userPassword" pattern="^(?=.*[A-Z]).{8,}$"/>
+  
+        @if(myForm.controls["userPassword"].invalid && myForm.controls["userPassword"].touched){
+            <div class="alert">Некорректный пароль</div>
+        }
+    </div>
+    <div>
+        <label>Прочитал условие регистрации</label><br>
+        <input name="checkbox" type="checkbox" formControlName="usercheck"/>
+  
+        @if(myForm.controls["usercheck"].invalid){
+            <div class="alert">Незаполненное поле</div>
+        }
+    </div>
+    <div formArrayName="activities">
+    @for(activity of getFormsControls()["controls"]; track $index){
+        <div>
+            <label>Хобби</label><br>
+            <input formControlName="{{$index}}" />
+        </div>
+    }
+    </div>
+    <button (click)="addActivities()">Добавить [хобби]</button>
+    <button [disabled]="myForm.invalid">Отправить</button>
+  </form>
+  

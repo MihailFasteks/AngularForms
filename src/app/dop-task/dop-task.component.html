@@ -1,0 +1,13 @@
+<form  #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
+    <p>
+        <label>Email</label><br>
+        <input name="email" ngModel required />
+    </p>
+    <p>
+        <label>Password</label><br>
+        <input name="password" ngModel
+            required password />
+    </p>
+    
+    <input type="submit" [disabled]="myForm.invalid" value="Отправить" />
+  </form>
